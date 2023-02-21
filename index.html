@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+
+<script>
+let playRound = prompt("ROCK, PAPER, or SCISSORS?");
+if (playRound){
+    let playerSelection = playRound.trim().toLowerCase();
+    if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors')
+    {
+        let computerSelection = getComputerChoice();
+        let result =
+            playerSelection === computerSelection
+            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nDraw!`
+            :playerSelection === 'rock' && computerSelection === 'paper'
+            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Lose! Paper beats Rock`
+            :playerSelection === 'paper' && computerSelection === 'scissors'
+            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Lose! Scissors beats Paper`
+            :playerSelection === 'scissors' && computerSelection === 'rock'
+            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Lose! Rock beats Scissors`
+            :`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Win!`
+        console.log(result)
+    } else {
+        alert("You didnt enter a valid answer");
+    }
+}
+
+
+
+function getComputerChoice (){
+    let randNum = Math.floor(Math.random() * 3 + 1);
+    let computer = randNum === 1 ? "rock" 
+        : randNum === 2 ? "paper"
+        : "scissors";
+    return computer;
+}
+
+/*if (player){
+    result = "draw"
+}
+else{
+    if (player == "ROCK"){
+        if (computer == "SCISSORS"){
+            result = "you win!";
+        } 
+        else if (computer == "PAPER"){
+            result = "you lose!";
+        } 
+    }
+    else if (player == "PAPER"){
+        if (computer == "ROCK"){
+            result = "you win!";
+        } 
+        else if (computer == "SCISSORS"){
+            result = "you lose!";
+        } 
+    }
+    else if (player == "SCISSORS"){
+        if (computer == "PAPER"){
+            result = "you win!";
+        } 
+        else if (computer == "ROCK"){
+            result = "you lose!";
+        } 
+    }*/
+</script>
+</body>
+</html>
