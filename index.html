@@ -9,31 +9,66 @@
 <body>
 
 <script>
-let playRound = prompt("ROCK, PAPER, or SCISSORS?");
-if (playRound){
-    let playerSelection = playRound.trim().toLowerCase();
-    if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors')
+
+let userScore = 0;
+let compScore = 0;
+
+function playRound(playerSelection, computerSelection)
+{
+if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors')
     {
-        let computerSelection = getComputerChoice();
-        let result =
-            playerSelection === computerSelection
-            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nDraw!`
-            :playerSelection === 'rock' && computerSelection === 'paper'
-            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Lose! Paper beats Rock`
-            :playerSelection === 'paper' && computerSelection === 'scissors'
-            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Lose! Scissors beats Paper`
-            :playerSelection === 'scissors' && computerSelection === 'rock'
-            ?`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Lose! Rock beats Scissors`
-            :`User: ${playerSelection}\nComputer: ${computerSelection} \nYou Win!`
-        console.log(result)
-    } else {
-        alert("You didnt enter a valid answer");
+        if (playerSelection === computerSelection){
+            return `User: ${playerSelection}\nComputer: ${computerSelection}\nThat was a draw. Try Again!\nScore: ${userScore} to ${compScore}`;
+        }
+        else if (playerSelection == 'rock' && computerSelection == 'paper') {
+            compScore++;
+            return `User: ${playerSelection}\nComputer: ${computerSelection}\nYou Lose! Paper beats Rock\nScore: ${userScore} to ${compScore}`;
+        }
+        else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+            compScore++;
+            return `User: ${playerSelection}\nComputer: ${computerSelection}\nYou Lose! Scissors beats Paper\nScore: ${userScore} to ${compScore}`;
+        }
+        else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+            compScore++;
+            return `User: ${playerSelection}\nComputer: ${computerSelection}\nYou Lose! Rock beats Scissors\nScore: ${userScore} to ${compScore}`;
+        }
+        else 
+            userScore++;
+            return `User: ${playerSelection}\nComputer: ${computerSelection}\nYou Win! ${playerSelection} beats ${computerSelection}\nScore: ${userScore} to ${compScore}`;
+    }
+else{
+    alert("You didnt enter a valid answer");
     }
 }
 
+function game() {
+    for (let i = 0; i < 5; i++) { 
+        const playerSelection = getPlayerChoice();
+        const computerSelection = getComputerChoice(); 
+        console.log(playRound(playerSelection, computerSelection))
+    }
+    if (userScore > compScore){
+        console.log(`You win! Final Score: ${userScore} to ${compScore}`);
+    }
+    else if (compScore > userScore){
+        console.log(`You lose! Final Score: ${userScore} to ${compScore}`);
+    }
+    else    
+        console.log(`You tied! Final Score: ${userScore} to ${compScore}`);
+}
 
+function getPlayerChoice(){
+    let choice = prompt("ROCK, PAPER, or SCISSORS?");
+    if (choice){
+    let player = choice.trim().toLowerCase();
+    return player;
+    } 
+    else {
+        alert("You didnt enter a valid answer");
+    }   
+}
 
-function getComputerChoice (){
+function getComputerChoice(){
     let randNum = Math.floor(Math.random() * 3 + 1);
     let computer = randNum === 1 ? "rock" 
         : randNum === 2 ? "paper"
@@ -41,34 +76,10 @@ function getComputerChoice (){
     return computer;
 }
 
-/*if (player){
-    result = "draw"
-}
-else{
-    if (player == "ROCK"){
-        if (computer == "SCISSORS"){
-            result = "you win!";
-        } 
-        else if (computer == "PAPER"){
-            result = "you lose!";
-        } 
-    }
-    else if (player == "PAPER"){
-        if (computer == "ROCK"){
-            result = "you win!";
-        } 
-        else if (computer == "SCISSORS"){
-            result = "you lose!";
-        } 
-    }
-    else if (player == "SCISSORS"){
-        if (computer == "PAPER"){
-            result = "you win!";
-        } 
-        else if (computer == "ROCK"){
-            result = "you lose!";
-        } 
-    }*/
+game();
+
+
+
 </script>
 </body>
 </html>
